@@ -1,7 +1,6 @@
 """
 Функции для интерполяции методом полинома Ньютона
-используя конечные разности,
-а также визулизации
+используя конечные разности
 
     * get_Newton_finite_diffs_table - получить таблицу конечных разностей
     * Newton_finite_diffs_interpol - интерполяция в точке х, по коэффициентам из таблицы разностей
@@ -14,6 +13,10 @@
 import math  # импортируем библиотеку math для работы с мат. функциями
 import matplotlib.pyplot as plt # для построения графиков
 import numpy as np  # для работы с массивами
+
+
+import os, sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
 from utils import *  # также служебные утилиты
 
@@ -71,34 +74,3 @@ def Newton_finite_diffs_interpol(table, x, step=None):
         sum += product  # увеличиваем сумму
     return sum  #возвращаем сумму
     
-
-
-src_file = "data/newton_finite_diffs_data.txt"  # файл с данными
-data = read_data(src_file, ['x', 'y']) # читаем файл в словарь data
-
-# координаты узловых точек
-x_points = data['x']
-y_points = data['y']
-
-step = 1  # величина постоянного шага
-
-# получаем таблицу
-table = get_Newton_finite_diffs_table(x_points, y_points)
-print(table)
-
-# координаты аппроксимирующей функции для графика
-x = np.arange(0, 7, 0.3)
-y = [Newton_finite_diffs_interpol(table, i, step) for i in x]
-
-# построение графика
-plt.figure() # инициализация
-plt.plot(x, y, label='Interpolation') # график функции
-plt.title("Newton finite difference polynomial interpolation")
-plt.xlabel("X")
-plt.ylabel("Y").set_rotation(0)
-# обозначение узловых точек
-plt.scatter(x_points, y_points, marker='o', color='green', label='Node points')
-plt.legend()
-plt.grid()
-plt.savefig("img/Newton_finite_diffs_interpol.png")
-plt.show()

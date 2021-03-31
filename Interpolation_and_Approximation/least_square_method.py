@@ -1,6 +1,5 @@
 """
 Функции для аппроксимации методом наименьших квадратов
-и их визуализация
 
     * get_least_square_method_coeffs - получить коэффициенты
     * line_approximate - аппроксимация прямой в точке икс
@@ -11,6 +10,10 @@
 
 import numpy as np  # для работы с массивами
 import matplotlib.pyplot as plt # для построения графиков
+
+
+import os, sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
 from utils import *  # вспомогательные функции
 
@@ -49,33 +52,7 @@ def line_approximate(x, coeffs):
     """Аппроксимация в точке икс по заданным коэффициентам"""
     return x * coeffs['c1'] + coeffs['c2']
 
-    
-src_file = "data/least_square_data.txt"  # файл с данными
-data = read_data(src_file, ['x', 'y']) # читаем файл в словарь data
 
-# заданы координаты точек 
-x_points = data['x']
-y_points = data['y']
-
-# получаем коэффициенты 
-coeffs = get_least_square_method_coeffs(x_points, y_points)
-
-# икс и игрек для графика
-x = np.arange(0, 7, 0.3)
-y = [line_approximate(i, coeffs) for i in x]
-
-# построение графика
-plt.figure() # инициализация
-plt.plot(x, y, label='Approximation') # график функции
-plt.title("Least square method")
-plt.xlabel("X")
-plt.ylabel("Y").set_rotation(0)
-# обозначение узловых точек
-plt.scatter(x_points, y_points, marker='o', color='green', label='Node points')
-plt.legend()
-plt.grid()
-plt.savefig("img/Least_square_method.png")
-plt.show()
 
 
 

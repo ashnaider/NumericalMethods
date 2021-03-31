@@ -1,7 +1,6 @@
 """
 Функции для интерполяции методом полинома Ньютона
-используя разделенные разности,
-а также визулизации
+используя разделенные разности
 
     * get_Newton_separated_diffs_table - получить таблицу разделенных разностей
     * Newton_separated_diffs_interpol - интерполяция в точке х, по коэффициентам из таблицы разностей
@@ -12,6 +11,10 @@
 
 import numpy as np  # импортируем библиотеку NumPy, для работы с массивами
 import matplotlib.pyplot as plt # импортируем PyPlot для построения графиков
+
+
+import os, sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
 from utils import *   # импортируем служебные утилиты 
 
@@ -48,35 +51,3 @@ def Newton_separated_diffs_interpol(x, table, x_points):
             tmp *= (x - x_points[j])  # домножаем на соответствующие разности иксов
         sum += tmp  # увеличиваем сумму
     return sum  # возвращаем результат
-
-
-
-src_file = "data/newton_separated_diffs_data.txt"  # файл с данными
-data = read_data(src_file, ['x', 'y']) # читаем файл в словарь data
-
-# заданы координаты узловых точек 
-x_points = data['x']
-y_points = data['y']
-
-# получаем таблицу разделенных разностей
-table = get_Newton_separated_diffs_table(x_points, y_points)
-
-# вывод информации
-print("Approximation value in point x=1: ", Newton_separated_diffs_interpol(1, table, x_points))
-
-# координаты аппроксимирующей функции для графика
-x = np.arange(0, 7, 0.3)
-y = [Newton_separated_diffs_interpol(i, table, x_points) for i in x]
-
-# построение графика
-plt.figure() # инициализация
-plt.plot(x, y, label='Interpolation') # график функции
-plt.title("Newton polynomial interpolation")
-plt.xlabel("X")
-plt.ylabel("Y").set_rotation(0)
-# обозначение узловых точек
-plt.scatter(x_points, y_points, marker='o', color='green', label='Node points')
-plt.legend()
-plt.grid()
-plt.savefig("img/Newton_separated_diffs_interpol.png")
-plt.show()
