@@ -2,7 +2,7 @@
 Numerical methods course 
 
 <details>
-           <summary>Interpolation and Approximation</summary>
+           <summary>Interpolations and Approximations</summary>
            <img src="https://github.com/ashnaider/NumericalMethods/blob/main/Interpolation_and_Approximation/img/Lagrangian.png"/>
            <img src="https://github.com/ashnaider/NumericalMethods/blob/main/Interpolation_and_Approximation/img/Newton_finite_diffs_interpol.png"/>
            <img src="https://github.com/ashnaider/NumericalMethods/blob/main/Interpolation_and_Approximation/img/Least_square_method.png"/>
@@ -10,8 +10,22 @@ Numerical methods course
       
 </details>
 <details>
-           <summary>Integrals</summary>
-      
+           <summary>Derivatives</summary>
+           <img src="https://github.com/ashnaider/NumericalMethods/blob/main/Derivative/img/num_diff_by_func.png"/>
+           <img src="https://github.com/ashnaider/NumericalMethods/blob/main/Derivative/img/num_diff_by_table.png"/>
 </details>
+<details>
+           <summary>Integrals</summary>
+           <img src="https://github.com/ashnaider/NumericalMethods/blob/main/Integrals/img/left_rectangles.png"/>
+           <img src="https://github.com/ashnaider/NumericalMethods/blob/main/Integrals/img/right_rectangles.png"/>
+           <img src="https://github.com/ashnaider/NumericalMethods/blob/main/Integrals/img/central_rectangles.png"/>
+           <img src="https://github.com/ashnaider/NumericalMethods/blob/main/Integrals/img/Trapezoids.png"/>
+           <img src="https://github.com/ashnaider/NumericalMethods/blob/main/Integrals/img/Simpson(r%3D2).png"/>
+           <img src="https://github.com/ashnaider/NumericalMethods/blob/main/Integrals/img/Simpson(r%3D3).png"/>
 
+</details>
+<details>
+           <summary>Nonlinear equations</summary>     
+           <img src="https://github.com/ashnaider/NumericalMethods/blob/main/Nonlinear_equations/img/Bisection_root_finding.png"/>
+</details>
 
