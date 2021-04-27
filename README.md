@@ -2,9 +2,9 @@
 Numerical methods course 
 
 <details>
-           <summary>Title 1</summary>
+           <summary>Interpolation and Approximation</summary>
   
-           <p>![Lagrangian approximation](https://github.com/ashnaider/NumericalMethods/blob/main/Interpolation_and_Approximation/img/Lagrangian.png)</p>
+           ![Lagrangian approximation](https://github.com/ashnaider/NumericalMethods/blob/main/Interpolation_and_Approximation/img/Lagrangian.png)
 </details>
 
 
