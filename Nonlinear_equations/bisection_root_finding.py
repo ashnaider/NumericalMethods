@@ -1,111 +1,83 @@
 """
 Функция для нахождения
 корня функции методом бисекции
-и функция для построения графика
-
-    * func - Аналитически заданная функция
-    * within_eps - Проверка равности чисел a и b 
-                с заданной точностью eps
-
+    
     * root_by_bisection_method - 
         Нахождение корня функции 
         используя метод бисекции
 
-    * plot_func - Строит график функции 
-                и отмечает корень
-
 Author: Шнайдер Антон
 """
 
+from func import *   # аналитическая функция
+from plot_func import *  # для построения графика
 
-import math  # библиотека с мат. функциями
-# биьлиотека для построение графиков
-import matplotlib.pyplot as plt  
-import numpy as np  # для работы с массивами
+import os, sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
-def func(x):
-    """Аналитически заданная функция"""
-    return x**2 - math.pow(math.cos(x), 2)
+from utils import *  # служебные утилиты
 
-def within_eps(a, b, eps):
-    """Проверка равности чисел a и b
-        с заданной точностью eps"""
-    return ((a - eps) < b) and (b < (a + eps))
-
-def root_by_bisection_method(fun, a, b, eps):
+def root_by_bisection_method(fun, a, b, eps, max_iter=200):
     """Нахождение корня функции 
        используя метод бисекции"""
 
-    # проверяем, 
-    # не равны ли нулю, с заданной точностью,
-    # границы интервала
-    if within_eps(fun(a), 0, eps):
-        return a
-    if within_eps(fun(b), 0, eps):
-        return b
-    
+    if fun(a) < fun(b):
+        a, b = b, a
+
     i = 0
     while (True):
+        # если модуль разности 
+        # концов отрезков
+        # равен нулю 
+        # с заданной точностью
+        if within_eps(a, b, eps):
+            print("abs(b - a) = {b} - {a}"
+            " = {bma} < eps, f(a) = {fa:.4f}"
+            "".format(a=a, b=b, bma=b-a, fa=fun(a)))
+            print("i = ", i+1)
+            # возвращаем положение икса(а) и выходим
+            return a
+
         # получаем среднюю точку по икс
-        c = (a + b) / 2
+        c = (a + b) / 2.0
         fc = fun(c)  # значение функции в ней
         
         # выводим информацию на текущем шаге
         print("[a{i}; b{i}] = [{a:.4f}; {b:.4f}],"
         " => c = (a{i} + b{i})/2 = {c:.4}, "
         "fc = {fc:.4f}".format(i=i, a=a, b=b, c=c, fc=fc))
-        i += 1
-    
-        # если значение равно нулю
-        # с заданной точностью
-        if within_eps(fc, 0, eps):
-            # возвращаем положение икса и выходим
-            return c  
 
-        elif fc > 0: # если больше нуля
+        i += 1
+        curr = fun(a) * fc  # f(a) * f(c) 
+
+        if curr < 0: # если меньше нуля
             # новая граница справа равна с
             b = c
-        elif fc < 0: # если меньше нуля
+        elif curr > 0: # если больше нуля
             # новая граница слева равна с
             a = c
+        elif within_eps(curr, 0, eps):
+            # если равно нулю, завершаем
+            return c
+        elif i > max_iter:
+            # если кол-во итераций 
+            # превышает максимум - выходим
+            return c
     
-
-def plot_func(fun, a, b, root):
-    """Строит график функции 
-        и отмечает корень"""
-    
-    # иксы и игреки на интервале [a,b]
-    x = np.arange(a, b, 0.1)  
-    y = [fun(i) for i in x] 
-
-    # значение функции в корне
-    fc = fun(root)  
-
-    # заголовок графика
-    plt.title("Finding root using Bisection method")
-    plt.plot(x, y, label="Function")  # граифк функции
-
-    # ориентиры для корня на графике
-    plt.plot([a, b], [0, 0], color="orange", linestyle="dashed")
-    plt.plot([root, root], [fun(a), fun(b)], color="orange", 
-                                             linestyle="dashed")
-
-    # отмечаем точку корня на графике
-    plt.scatter(([root]), ([fc]), s=70, zorder=3, color="red", 
-                label="root: x={:.4f}\nEPS={}".format(fc, eps))
-    plt.legend()  # отображаем подписи
-    plt.show()  # показываем график
-
 
 if __name__ == "__main__":
-    a = 0  # границы 
-    b = 5  # интервала
+
+    a = 0.6  # границы 
+    b = a+1  # интервала
     eps = 0.01  # заданная точность
 
     # находим корень с заданной точностью
     root = root_by_bisection_method(func, a, b, eps)
-    print(root)
+    print("root: {:.7f}".format(root))
 
     # строим график
-    plot_func(func, a, b, root)
+    plot_func(func, -1, 1.5, root, eps, 
+        title="Finding root using bisection method")
+
+
 
