@@ -10,6 +10,14 @@
 
 import inspect  # для полезной информации об объектах в Pyhton 
 
+
+def within_eps(a, b, eps):
+    """Проверка равности чисел a и b
+        с заданной точностью eps"""
+    # return ((a - eps) < b) and (b < (a + eps))
+    return abs(a - b) < eps
+
+
 def check_arr_size(lhs, rhs):
     """Проверяет размеры массивов на равенство"""
     if (len(lhs) != len(rhs)):  # если длины массивов разные

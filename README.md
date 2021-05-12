@@ -26,6 +26,6 @@ Numerical methods course
 </details>
 <details>
            <summary>Nonlinear equations</summary>     
-           <img src="https://github.com/ashnaider/NumericalMethods/blob/main/Nonlinear_equations/img/Bisection_root_finding.png"/>
+           <img src="https://github.com/ashnaider/NumericalMethods/blob/main/Nonlinear_equations/img/Finding_root_using_Newthon_method.jpg"/>
 </details>
 
