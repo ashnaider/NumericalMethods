@@ -1,9 +1,7 @@
 """
 Служебные функции 
-
     * check_arr_size - проверить массивы на размер
     * read_data - прочитать данные из файла
-
 Автор: Шнайдер Антон
 """
 
@@ -48,6 +46,7 @@ def read_data(file_name, headers):
                 res[curr_header] = list(map( lambda x: float(x.replace(',', '').strip()), line[semi_index+1:].split(',')))
 
         return res  # возвращаем словарь
+
 
             
     
